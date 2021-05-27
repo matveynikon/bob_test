@@ -68,11 +68,6 @@ const puppeteer = require('puppeteer');
     let han = '@benshapiro'
     let someVar = han.replace('@', 'A');
     console.log(someVar);
-    await page.screenshot({
-      path: "./screenshot2.jpg",
-      type: "jpeg",
-      fullPage: true
-    });
     const url = 'https://twitter.com/search?q=(from%3' + someVar + ')%20until%3A' + '2021-04-08' + '%20since%3A' + '2021-04-01' + '%20-filter%3Areplies&src=typed_query&f=live';
     await page.goto(url, { waitUntil: 'domcontentloaded' })
     await page.waitFor(2000)
@@ -95,6 +90,11 @@ const puppeteer = require('puppeteer');
       else
         request.continue();
     })
+    await page.screenshot({
+      path: "./screenshot2.jpg",
+      type: "jpeg",
+      fullPage: true
+    });
     for(r = 0; r < 1000000; r++){
       await page.waitFor(1000)
       var title = await page.evaluate(() => Array.from(document.querySelectorAll('#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div > div > div:nth-child(2) > div > div > section > div > div > div:nth-child(1) > div > div > article > div > div > div > div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-1iusvr4.r-16y2uox.r-1777fci.r-kzbkwu > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-1wtj0ep.r-1s2bzr4.r-1mdbhws > div:nth-child(3) > div > div > div.css-1dbjc4n.r-xoduu5.r-1udh08x > span > span'), element => element.textContent));
